@@ -25,6 +25,23 @@ const GRADE_LEVELS = [
   { grades: '8', label: 'Klasse 8', niveau: 'E/F' },
 ]
 
+const NIVEAU_LEVELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
+// Verteilung der Niveaustufen pro Klassenstufe in Fünfteln.
+// Quelle: Rahmenlehrplan Berlin-Brandenburg, Teil C Mathematik.
+// Klassen 1–6 aus dem RLP-Diagramm; Klassen 7–8 durch Fortschreibung
+// des diagonalen Musters.
+const NIVEAU_DISTRIBUTION = {
+  '1': { A: 4, B: 1 },
+  '2': { A: 1, B: 3, C: 1 },
+  '3': { B: 1, C: 3, D: 1 },
+  '4': { C: 4, D: 1 },
+  '5': { C: 1, D: 3, E: 1 },
+  '6': { D: 4, E: 1 },
+  '7': { D: 1, E: 3, F: 1 },
+  '8': { E: 4, F: 1 },
+}
+
 const MOCK_GRADE_MAP = { '1': '1-2', '2': '1-2', '3': '3-4', '4': '3-4', '5': '5-6', '6': '5-6', '7': '7-8', '8': '7-8' }
 
 const MATH_SYMBOLS = ['+', '−', '×', '÷', 'π', '√', '=', '%', '∑', '∞']
