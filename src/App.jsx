@@ -60,252 +60,43 @@ const COLOR_MAP = {
 // MOCK DATA (Fallback when no API key)
 // ============================================================
 
+
 const MOCK_TASKS = {
   'L1': {
-    '1-2': [
-      { question: 'Was ergibt 3 + 4?', answer: '7', hint: 'Zähle von 3 weiter: 4, 5, 6, 7.', difficulty: 1, explanation: '3 + 4 = 7' },
-      { question: 'Was ergibt 8 − 3?', answer: '5', hint: 'Nimm 3 von 8 weg.', difficulty: 1, explanation: '8 − 3 = 5' },
-      { question: 'Ergänze: 6 + ___ = 10', answer: '4', hint: 'Was fehlt noch bis 10?', difficulty: 1, explanation: '6 + 4 = 10' },
-      { question: 'Was ergibt 2 + 2 + 2?', answer: '6', hint: 'Rechne Schritt für Schritt.', difficulty: 1, explanation: '2 + 2 = 4, dann 4 + 2 = 6' },
-      { question: 'Welche Zahl kommt nach 15?', answer: '16', hint: 'Zähle eins weiter.', difficulty: 1, explanation: 'Nach 15 kommt 16.' },
-      { question: 'Was ergibt 9 − 5?', answer: '4', hint: 'Zähle von 5 bis 9.', difficulty: 2, explanation: '9 − 5 = 4' },
-      { question: 'Was ist größer: 12 oder 8?', answer: '12', hint: 'Welche Zahl liegt weiter rechts auf dem Zahlenstrahl?', difficulty: 1, explanation: '12 > 8' },
-      { question: 'Was ergibt 7 + 6?', answer: '13', hint: '7 + 3 = 10, dann noch 3 dazu.', difficulty: 2, explanation: '7 + 6 = 13' },
-      { question: 'Ergänze: ___ + 5 = 12', answer: '7', hint: 'Rechne 12 − 5.', difficulty: 2, explanation: '7 + 5 = 12' },
-      { question: 'Was ergibt 15 − 8?', answer: '7', hint: 'Rechne erst 15 − 5 = 10, dann 10 − 3.', difficulty: 2, explanation: '15 − 8 = 7' },
-    ],
     '3-4': [
-      { question: 'Was ergibt 45 + 37?', answer: '82', hint: '40 + 30 = 70, dann 5 + 7 = 12.', difficulty: 1, explanation: '45 + 37 = 82' },
-      { question: 'Was ergibt 6 × 7?', answer: '42', hint: '6 × 7 ist das gleiche wie 7 × 6.', difficulty: 1, explanation: '6 × 7 = 42' },
-      { question: 'Was ergibt 81 ÷ 9?', answer: '9', hint: 'Wie oft passt 9 in 81?', difficulty: 1, explanation: '81 ÷ 9 = 9' },
-      { question: 'Runde 467 auf Hunderter.', answer: '500', hint: 'Schau auf die Zehnerstelle: 6 → aufrunden.', difficulty: 1, explanation: '467 ≈ 500' },
-      { question: 'Was ergibt 100 − 36?', answer: '64', hint: '100 − 30 = 70, dann 70 − 6.', difficulty: 1, explanation: '100 − 36 = 64' },
-      { question: 'Was ergibt 8 × 9?', answer: '72', hint: '8 × 10 = 80, minus 8.', difficulty: 2, explanation: '8 × 9 = 72' },
-      { question: 'Was ergibt 256 + 144?', answer: '400', hint: 'Rechne stellenweise.', difficulty: 2, explanation: '256 + 144 = 400' },
-      { question: 'Welcher Bruch ist gleich 0,5?', answer: '1/2', hint: 'Die Hälfte von 1.', difficulty: 2, explanation: '0,5 = 1/2' },
-      { question: 'Was ergibt 132 ÷ 4?', answer: '33', hint: '120 ÷ 4 = 30, dann 12 ÷ 4 = 3.', difficulty: 3, explanation: '132 ÷ 4 = 33' },
-      { question: 'Was ist die Hälfte von 248?', answer: '124', hint: 'Halbiere 200 und 48 getrennt.', difficulty: 2, explanation: '248 ÷ 2 = 124' },
+      {
+        type: 'place-value',
+        code: 'ZD3',
+        niveau: 'C',
+        question: 'Trage die Zahl vierhundertdreiundzwanzigtausendsechzig in die Stellenwerttafel ein. Ziehe die Ziffern in die richtigen Felder.',
+        number: 423060,
+        columns: ['HT', 'ZT', 'T', 'H', 'Z', 'E'],
+        answer: '423060',
+        hint: 'Sprich die Zahl langsam: vier-HT, zwei-ZT, drei-T, null-H, sechs-Z, null-E.',
+        difficulty: 2,
+        explanation: '423.060 = 4 HT · 2 ZT · 3 T · 0 H · 6 Z · 0 E',
+      },
     ],
     '5-6': [
-      { question: 'Was ergibt 3/4 + 1/4?', answer: '1', hint: 'Gleicher Nenner – zähle die Zähler zusammen.', difficulty: 1, explanation: '3/4 + 1/4 = 4/4 = 1' },
-      { question: 'Berechne 15% von 200.', answer: '30', hint: '10% = 20, 5% = 10.', difficulty: 2, explanation: '15% von 200 = 30' },
-      { question: 'Was ergibt −3 + 7?', answer: '4', hint: 'Starte bei −3 und gehe 7 Schritte nach rechts.', difficulty: 1, explanation: '−3 + 7 = 4' },
-      { question: 'Kürze den Bruch 12/18.', answer: '2/3', hint: 'Teile Zähler und Nenner durch 6.', difficulty: 2, explanation: '12/18 = 2/3' },
-      { question: 'Was ergibt 2,5 × 4?', answer: '10', hint: '2 × 4 = 8, plus 0,5 × 4 = 2.', difficulty: 1, explanation: '2,5 × 4 = 10' },
-      { question: 'Ordne: −2, 5, 0, −7, 3 (aufsteigend)', answer: '-7, -2, 0, 3, 5', hint: 'Negative Zahlen sind kleiner als 0.', difficulty: 2, explanation: '−7 < −2 < 0 < 3 < 5' },
-      { question: 'Was ist der ggT von 24 und 36?', answer: '12', hint: 'Welche Zahl teilt beide ohne Rest?', difficulty: 3, explanation: 'ggT(24, 36) = 12' },
-      { question: 'Was ergibt 1/3 von 90?', answer: '30', hint: 'Teile 90 durch 3.', difficulty: 1, explanation: '90 ÷ 3 = 30' },
-      { question: 'Wandle 0,75 in einen Bruch um.', answer: '3/4', hint: '0,75 = 75/100 – jetzt kürzen.', difficulty: 2, explanation: '0,75 = 75/100 = 3/4' },
-      { question: 'Was ergibt (−4) × (−3)?', answer: '12', hint: 'Minus mal Minus ergibt Plus.', difficulty: 2, explanation: '(−4) × (−3) = 12' },
-    ],
-    '7-8': [
-      { question: 'Löse: 2x + 5 = 17. Was ist x?', answer: '6', hint: 'Erst −5, dann ÷2.', difficulty: 1, explanation: '2x = 12, x = 6' },
-      { question: 'Was ergibt √144?', answer: '12', hint: 'Welche Zahl mal sich selbst ergibt 144?', difficulty: 1, explanation: '12 × 12 = 144' },
-      { question: 'Berechne 3² + 4².', answer: '25', hint: '9 + 16 = ?', difficulty: 1, explanation: '9 + 16 = 25' },
-      { question: 'Was ist 25% von 360?', answer: '90', hint: '25% = 1/4.', difficulty: 1, explanation: '360 ÷ 4 = 90' },
-      { question: 'Vereinfache: 3(x + 2) − x', answer: '2x + 6', hint: 'Erst ausmultiplizieren, dann zusammenfassen.', difficulty: 2, explanation: '3x + 6 − x = 2x + 6' },
-      { question: 'Löse: x/3 = 15. Was ist x?', answer: '45', hint: 'Multipliziere beide Seiten mit 3.', difficulty: 1, explanation: 'x = 15 × 3 = 45' },
-      { question: 'Was ergibt 2⁵?', answer: '32', hint: '2 × 2 × 2 × 2 × 2', difficulty: 2, explanation: '2⁵ = 32' },
-      { question: 'Berechne: (−2)³', answer: '-8', hint: '(−2) × (−2) × (−2)', difficulty: 2, explanation: '(−2)³ = −8' },
-      { question: 'Was ist der Wert von 5! (Fakultät)?', answer: '120', hint: '5 × 4 × 3 × 2 × 1', difficulty: 3, explanation: '5! = 120' },
-      { question: 'Löse: 3x − 7 = 2x + 5. Was ist x?', answer: '12', hint: 'Bringe x auf eine Seite.', difficulty: 2, explanation: 'x = 12' },
-    ],
-  },
-  'L2': {
-    '1-2': [
-      { question: 'Wie viele Zentimeter sind 1 Meter?', answer: '100', hint: '1 m = ? cm', difficulty: 1, explanation: '1 m = 100 cm' },
-      { question: 'Was ist länger: 50 cm oder 1 m?', answer: '1 m', hint: 'Wandle 1 m in cm um.', difficulty: 1, explanation: '1 m = 100 cm > 50 cm' },
-      { question: 'Wie viele Minuten hat eine Stunde?', answer: '60', hint: 'Schau auf die Uhr!', difficulty: 1, explanation: '1 Stunde = 60 Minuten' },
-      { question: 'Was kostet es, wenn du 3 Äpfel für je 1 Euro kaufst?', answer: '3', hint: '3 × 1 = ?', difficulty: 1, explanation: '3 × 1 € = 3 €' },
-      { question: 'Wie viel Wechselgeld bekommst du bei 2 € und 1 € Kosten?', answer: '1', hint: '2 − 1 = ?', difficulty: 1, explanation: '2 € − 1 € = 1 € Wechselgeld' },
-      { question: 'Was ist am längsten: 30 cm, 2 m, 50 cm?', answer: '2 m', hint: '2 m = 200 cm', difficulty: 2, explanation: '2 m = 200 cm > 50 cm > 30 cm' },
-      { question: 'Wie schwer ist 1 Kilogramm in Gramm?', answer: '1000', hint: 'Kilo bedeutet tausend.', difficulty: 2, explanation: '1 kg = 1000 g' },
-      { question: 'Welcher Monat hat 28 oder 29 Tage?', answer: 'Februar', hint: 'Der kürzeste Monat.', difficulty: 1, explanation: 'Der Februar hat 28 (oder 29) Tage.' },
-      { question: 'Es ist 10 Uhr. In 3 Stunden ist es...?', answer: '13 Uhr', hint: '10 + 3 = ?', difficulty: 1, explanation: '10 + 3 = 13 Uhr' },
-      { question: 'Was ist schwerer: 500 g oder 1 kg?', answer: '1 kg', hint: '1 kg = 1000 g', difficulty: 1, explanation: '1 kg = 1000 g > 500 g' },
-    ],
-    '3-4': [
-      { question: 'Wie viele Meter sind 3 km?', answer: '3000', hint: '1 km = 1000 m', difficulty: 1, explanation: '3 × 1000 = 3000 m' },
-      { question: 'Wie viele Sekunden hat eine Minute?', answer: '60', hint: 'Genau wie Minuten pro Stunde.', difficulty: 1, explanation: '1 Minute = 60 Sekunden' },
-      { question: 'Was ist 2 kg 500 g in Gramm?', answer: '2500', hint: '2 kg = 2000 g, dann + 500 g.', difficulty: 2, explanation: '2000 + 500 = 2500 g' },
-      { question: 'Wie viele Tage hat ein Schaltjahr?', answer: '366', hint: 'Ein normales Jahr hat 365 Tage.', difficulty: 1, explanation: '365 + 1 = 366 Tage' },
-      { question: 'Rechne um: 1,5 Stunden = ? Minuten', answer: '90', hint: '1 Stunde = 60 Min, halbe Stunde = 30 Min.', difficulty: 2, explanation: '60 + 30 = 90 Minuten' },
-      { question: 'Was ist 3,50 € + 2,75 €?', answer: '6,25', hint: 'Addiere erst die Euro, dann die Cent.', difficulty: 2, explanation: '3,50 + 2,75 = 6,25 €' },
-      { question: 'Wie viele cm sind 4 m 35 cm?', answer: '435', hint: '4 m = 400 cm, dann + 35 cm.', difficulty: 2, explanation: '400 + 35 = 435 cm' },
-      { question: 'Du kaufst 4 Hefte für je 1,25 €. Wie viel zahlst du?', answer: '5', hint: '4 × 1,25 = ?', difficulty: 2, explanation: '4 × 1,25 = 5,00 €' },
-      { question: 'Wie viele Millimeter sind 5 cm?', answer: '50', hint: '1 cm = 10 mm', difficulty: 1, explanation: '5 × 10 = 50 mm' },
-      { question: 'Ein Film dauert von 14:30 bis 16:15. Wie lange dauert er?', answer: '1 Stunde 45 Minuten', hint: 'Von 14:30 bis 16:30 sind 2 Stunden, aber...', difficulty: 3, explanation: '16:15 − 14:30 = 1 h 45 min' },
-    ],
-    '5-6': [
-      { question: 'Rechne um: 3,5 km = ? m', answer: '3500', hint: '1 km = 1000 m', difficulty: 1, explanation: '3,5 × 1000 = 3500 m' },
-      { question: 'Wie viel sind 750 ml in Litern?', answer: '0,75', hint: '1000 ml = 1 l', difficulty: 1, explanation: '750 ÷ 1000 = 0,75 l' },
-      { question: 'Berechne den Umfang eines Rechtecks mit a=8cm, b=5cm.', answer: '26 cm', hint: 'U = 2 × (a + b)', difficulty: 2, explanation: '2 × (8+5) = 26 cm' },
-      { question: 'Was sind 20% von 150 €?', answer: '30', hint: '10% = 15 €, also 20% = ?', difficulty: 2, explanation: '150 × 0,2 = 30 €' },
-      { question: 'Rechne um: 2 h 30 min = ? Minuten', answer: '150', hint: '2 × 60 + 30', difficulty: 1, explanation: '120 + 30 = 150 Minuten' },
-      { question: 'Ein Fahrrad kostet 250 €, du bekommst 15% Rabatt. Was zahlst du?', answer: '212,50', hint: '15% von 250 = 37,50', difficulty: 3, explanation: '250 − 37,50 = 212,50 €' },
-      { question: 'Wie viele m² hat ein Zimmer mit 4 m × 3,5 m?', answer: '14', hint: 'Fläche = Länge × Breite', difficulty: 2, explanation: '4 × 3,5 = 14 m²' },
-      { question: 'Rechne um: 4500 g = ? kg', answer: '4,5', hint: '1000 g = 1 kg', difficulty: 1, explanation: '4500 ÷ 1000 = 4,5 kg' },
-      { question: 'Ein Zug fährt um 9:45 ab und kommt um 11:20 an. Wie lange fährt er?', answer: '1 Stunde 35 Minuten', hint: 'Von 9:45 bis 11:45 sind 2 Stunden, aber...', difficulty: 2, explanation: '11:20 − 9:45 = 1 h 35 min' },
-      { question: 'Wie viele cm³ sind 2 Liter?', answer: '2000', hint: '1 l = 1000 cm³', difficulty: 2, explanation: '2 × 1000 = 2000 cm³' },
-    ],
-    '7-8': [
-      { question: 'Berechne die Fläche eines Kreises mit r = 5 cm (π ≈ 3,14).', answer: '78,5', hint: 'A = π × r²', difficulty: 2, explanation: '3,14 × 25 = 78,5 cm²' },
-      { question: 'Wie viel sind 0,003 km in Metern?', answer: '3', hint: '1 km = 1000 m', difficulty: 1, explanation: '0,003 × 1000 = 3 m' },
-      { question: 'Berechne das Volumen eines Quaders: 6cm × 4cm × 3cm.', answer: '72', hint: 'V = l × b × h', difficulty: 1, explanation: '6 × 4 × 3 = 72 cm³' },
-      { question: 'Ein Artikel kostet 80 € netto. Mit 19% MwSt kostet er...?', answer: '95,20', hint: '80 × 1,19 = ?', difficulty: 2, explanation: '80 × 1,19 = 95,20 €' },
-      { question: 'Rechne 2,5 m² in cm² um.', answer: '25000', hint: '1 m² = 10000 cm²', difficulty: 2, explanation: '2,5 × 10000 = 25000 cm²' },
-      { question: 'Wie schnell fährt ein Auto, das 150 km in 2 Stunden schafft?', answer: '75', hint: 'v = s ÷ t', difficulty: 1, explanation: '150 ÷ 2 = 75 km/h' },
-      { question: 'Berechne die Oberfläche eines Würfels mit a = 5 cm.', answer: '150', hint: 'O = 6 × a²', difficulty: 2, explanation: '6 × 25 = 150 cm²' },
-      { question: 'Wie viele Sekunden sind 2,5 Stunden?', answer: '9000', hint: '2,5 × 60 × 60', difficulty: 2, explanation: '2,5 × 3600 = 9000 s' },
-      { question: 'Ein Dreieck hat die Seiten 3cm, 4cm, 5cm. Berechne den Umfang.', answer: '12', hint: 'U = a + b + c', difficulty: 1, explanation: '3 + 4 + 5 = 12 cm' },
-      { question: 'Wie viel Wasser fasst ein Aquarium: 60cm × 30cm × 40cm (in Litern)?', answer: '72', hint: 'Volumen in cm³, dann ÷ 1000 für Liter.', difficulty: 3, explanation: '72000 cm³ = 72 Liter' },
-    ],
-  },
-  'L3': {
-    '1-2': [
-      { question: 'Wie viele Ecken hat ein Dreieck?', answer: '3', hint: 'Drei-eck = 3 Ecken.', difficulty: 1, explanation: 'Ein Dreieck hat 3 Ecken.' },
-      { question: 'Wie heißt eine Form mit 4 gleich langen Seiten?', answer: 'Quadrat', hint: 'Alle Seiten gleich lang, alle Winkel gleich.', difficulty: 1, explanation: 'Ein Quadrat hat 4 gleich lange Seiten.' },
-      { question: 'Wie viele Seiten hat ein Rechteck?', answer: '4', hint: 'Recht-eck = 4 Ecken = 4 Seiten.', difficulty: 1, explanation: 'Ein Rechteck hat 4 Seiten.' },
-      { question: 'Welche Form ist rund?', answer: 'Kreis', hint: 'Keine Ecken, keine Kanten.', difficulty: 1, explanation: 'Ein Kreis ist rund.' },
-      { question: 'Hat ein Würfel runde Flächen?', answer: 'Nein', hint: 'Alle Flächen eines Würfels sind Quadrate.', difficulty: 1, explanation: 'Nein, alle Flächen eines Würfels sind quadratisch.' },
-      { question: 'Wie viele Flächen hat ein Würfel?', answer: '6', hint: 'Oben, unten, vorne, hinten, links, rechts.', difficulty: 2, explanation: 'Ein Würfel hat 6 quadratische Flächen.' },
-      { question: 'Was ist ein Zylinder? Nenne einen Gegenstand.', answer: 'Dose', hint: 'Rund oben und unten.', difficulty: 1, explanation: 'Eine Dose, ein Glas – das sind Zylinder.' },
-      { question: 'Wie viele Ecken hat ein Sechseck?', answer: '6', hint: 'Sechs-eck = ? Ecken.', difficulty: 1, explanation: 'Ein Sechseck hat 6 Ecken.' },
-      { question: 'Ist ein Ball eine Kugel?', answer: 'Ja', hint: 'Rund von allen Seiten.', difficulty: 1, explanation: 'Ja, ein Ball hat die Form einer Kugel.' },
-      { question: 'Wie viele Symmetrieachsen hat ein Quadrat?', answer: '4', hint: 'Falte es in der Mitte – auf wie viele Arten geht das?', difficulty: 2, explanation: 'Ein Quadrat hat 4 Symmetrieachsen.' },
-    ],
-    '3-4': [
-      { question: 'Wie viele Kanten hat ein Quader?', answer: '12', hint: '4 oben, 4 unten, 4 senkrechte.', difficulty: 1, explanation: 'Ein Quader hat 12 Kanten.' },
-      { question: 'Was ist der Umfang eines Quadrats mit Seitenlänge 6 cm?', answer: '24 cm', hint: 'U = 4 × a', difficulty: 1, explanation: '4 × 6 = 24 cm' },
-      { question: 'Berechne die Fläche: Rechteck 7 cm × 4 cm.', answer: '28 cm²', hint: 'A = l × b', difficulty: 1, explanation: '7 × 4 = 28 cm²' },
-      { question: 'Wie viele rechte Winkel hat ein Rechteck?', answer: '4', hint: 'Alle Winkel in einem Rechteck sind gleich.', difficulty: 1, explanation: 'Ein Rechteck hat 4 rechte Winkel (je 90°).' },
-      { question: 'Wie heißt ein Dreieck mit 3 gleich langen Seiten?', answer: 'gleichseitiges Dreieck', hint: 'Gleich-seitig = alle Seiten gleich.', difficulty: 2, explanation: 'Ein gleichseitiges Dreieck hat 3 gleich lange Seiten.' },
-      { question: 'Wie viele Symmetrieachsen hat ein Kreis?', answer: 'unendlich viele', hint: 'Jeder Durchmesser ist eine Symmetrieachse.', difficulty: 2, explanation: 'Ein Kreis hat unendlich viele Symmetrieachsen.' },
-      { question: 'Ist ein Quadrat auch ein Rechteck?', answer: 'Ja', hint: 'Ein Quadrat hat auch 4 rechte Winkel.', difficulty: 2, explanation: 'Ja, ein Quadrat ist ein spezielles Rechteck.' },
-      { question: 'Wie groß ist ein rechter Winkel in Grad?', answer: '90', hint: 'Wie eine Zimmerecke.', difficulty: 1, explanation: 'Ein rechter Winkel = 90°.' },
-      { question: 'Berechne den Umfang eines Dreiecks mit Seiten 3, 4, 5 cm.', answer: '12 cm', hint: 'U = a + b + c', difficulty: 2, explanation: '3 + 4 + 5 = 12 cm' },
-      { question: 'Nenne einen Gegenstand, der die Form einer Pyramide hat.', answer: 'Dach', hint: 'Spitz nach oben...', difficulty: 1, explanation: 'z.B. ein Dach, Zelt oder eine ägyptische Pyramide.' },
-    ],
-    '5-6': [
-      { question: 'Wie viele Ecken hat ein Würfel?', answer: '8', hint: 'Zähle oben 4 und unten 4.', difficulty: 1, explanation: 'Ein Würfel hat 8 Ecken.' },
-      { question: 'Wie viele Kanten hat ein Quader?', answer: '12', hint: '4 oben, 4 unten, 4 senkrechte.', difficulty: 1, explanation: 'Ein Quader hat 12 Kanten.' },
-      { question: 'Berechne den Umfang eines Quadrats mit Seitenlänge 5 cm.', answer: '20 cm', hint: 'U = 4 × a', difficulty: 1, explanation: '4 × 5 = 20 cm' },
-      { question: 'Fläche eines Rechtecks: Länge 8 cm, Breite 3 cm.', answer: '24 cm²', hint: 'A = Länge × Breite', difficulty: 1, explanation: '8 × 3 = 24 cm²' },
-      { question: 'Welche Form hat 3 Ecken?', answer: 'Dreieck', hint: 'Drei...', difficulty: 1, explanation: 'Ein Dreieck hat 3 Ecken.' },
-      { question: 'Wie groß ist die Winkelsumme in einem Dreieck?', answer: '180°', hint: 'Alle drei Winkel zusammen.', difficulty: 2, explanation: 'Die Winkelsumme im Dreieck beträgt 180°.' },
-      { question: 'Umfang eines Kreises mit r = 7 cm (π ≈ 3,14).', answer: '43,96 cm', hint: 'U = 2 × π × r', difficulty: 2, explanation: '2 × 3,14 × 7 ≈ 43,96 cm' },
-      { question: 'Wie viele Symmetrieachsen hat ein Quadrat?', answer: '4', hint: '2 diagonale + 2 durch die Seitenmitten.', difficulty: 2, explanation: 'Ein Quadrat hat 4 Symmetrieachsen.' },
-      { question: 'Volumen eines Würfels mit a = 4 cm.', answer: '64 cm³', hint: 'V = a³', difficulty: 3, explanation: '4³ = 64 cm³' },
-      { question: 'Was ist der Unterschied zwischen Radius und Durchmesser?', answer: 'Der Durchmesser ist doppelt so lang wie der Radius', hint: 'd = 2 × r', difficulty: 1, explanation: 'd = 2r, der Radius geht vom Mittelpunkt zum Rand.' },
-    ],
-    '7-8': [
-      { question: 'Berechne die Fläche eines Dreiecks: g=10cm, h=6cm.', answer: '30', hint: 'A = (g × h) / 2', difficulty: 1, explanation: '(10 × 6) / 2 = 30 cm²' },
-      { question: 'Satz des Pythagoras: a=3, b=4. Wie lang ist c?', answer: '5', hint: 'c² = a² + b²', difficulty: 2, explanation: '9 + 16 = 25, √25 = 5' },
-      { question: 'Berechne die Fläche eines Kreises: r=10cm (π ≈ 3,14).', answer: '314', hint: 'A = π × r²', difficulty: 2, explanation: '3,14 × 100 = 314 cm²' },
-      { question: 'Wie groß ist die Winkelsumme im Viereck?', answer: '360°', hint: 'Ein Viereck lässt sich in 2 Dreiecke teilen.', difficulty: 1, explanation: '2 × 180° = 360°' },
-      { question: 'Volumen eines Zylinders: r=3cm, h=10cm (π ≈ 3,14).', answer: '282,6', hint: 'V = π × r² × h', difficulty: 2, explanation: '3,14 × 9 × 10 = 282,6 cm³' },
-      { question: 'Berechne die Diagonale eines Quadrats: a=5cm.', answer: '7,07', hint: 'd = a × √2', difficulty: 3, explanation: '5 × 1,414 ≈ 7,07 cm' },
-      { question: 'Welcher Winkel ist ein stumpfer Winkel?', answer: 'zwischen 90° und 180°', hint: 'Größer als rechter Winkel, kleiner als gestreckter.', difficulty: 1, explanation: 'Stumpfe Winkel: 90° < α < 180°' },
-      { question: 'Oberfläche einer Kugel: r=5cm (π ≈ 3,14).', answer: '314', hint: 'O = 4 × π × r²', difficulty: 3, explanation: '4 × 3,14 × 25 = 314 cm²' },
-      { question: 'Berechne den Flächeninhalt eines Parallelogramms: g=8, h=5.', answer: '40', hint: 'A = g × h', difficulty: 1, explanation: '8 × 5 = 40 cm²' },
-      { question: 'Was ist der Strahlensatz?', answer: 'Parallele Geraden teilen Strahlen im gleichen Verhältnis', hint: 'Es geht um Verhältnisse bei parallelen Geraden.', difficulty: 2, explanation: 'Werden Strahlen von parallelen Geraden geschnitten, entstehen gleiche Verhältnisse.' },
-    ],
-  },
-  'L4': {
-    '3-4': [
-      { question: 'Ergänze: ___ + 8 = 15', answer: '7', hint: '15 − 8 = ?', difficulty: 1, explanation: '7 + 8 = 15' },
-      { question: 'Setze fort: 2, 4, 6, 8, ___', answer: '10', hint: 'Immer +2.', difficulty: 1, explanation: '8 + 2 = 10' },
-      { question: 'Setze fort: 5, 10, 15, 20, ___', answer: '25', hint: 'Immer +5.', difficulty: 1, explanation: '20 + 5 = 25' },
-      { question: 'Was ist die Regel? 1, 4, 7, 10, 13...', answer: 'immer plus 3', hint: 'Wie viel kommt jeweils dazu?', difficulty: 2, explanation: 'Die Regel ist +3.' },
-      { question: 'Finde x: x × 4 = 20', answer: '5', hint: '20 ÷ 4 = ?', difficulty: 1, explanation: '20 ÷ 4 = 5' },
-      { question: 'Wenn 3 Äpfel 6 € kosten, was kostet 1 Apfel?', answer: '2', hint: '6 ÷ 3 = ?', difficulty: 1, explanation: '6 ÷ 3 = 2 €' },
-      { question: 'Ergänze die Tabelle: x=1→y=3, x=2→y=6, x=3→y=?', answer: '9', hint: 'y = x × 3', difficulty: 2, explanation: '3 × 3 = 9' },
-      { question: 'Setze fort: 100, 90, 80, 70, ___', answer: '60', hint: 'Immer −10.', difficulty: 1, explanation: '70 − 10 = 60' },
-      { question: 'Finde x: 12 ÷ x = 4', answer: '3', hint: '12 ÷ ? = 4', difficulty: 2, explanation: '12 ÷ 3 = 4' },
-      { question: 'Wenn x = 5, was ist 2x + 1?', answer: '11', hint: 'Setze 5 für x ein.', difficulty: 2, explanation: '2×5 + 1 = 11' },
-    ],
-    '5-6': [
-      { question: 'Löse: x + 7 = 12', answer: '5', hint: '12 − 7 = ?', difficulty: 1, explanation: 'x = 12 − 7 = 5' },
-      { question: 'Löse: 3x = 18', answer: '6', hint: '18 ÷ 3 = ?', difficulty: 1, explanation: 'x = 18 ÷ 3 = 6' },
-      { question: 'Was ist der Wert von 2x + 3 wenn x = 4?', answer: '11', hint: 'Setze 4 ein.', difficulty: 1, explanation: '2×4 + 3 = 11' },
-      { question: 'Löse: x − 5 = 8', answer: '13', hint: '8 + 5 = ?', difficulty: 1, explanation: 'x = 8 + 5 = 13' },
-      { question: 'y = 2x. Wenn x=5, was ist y?', answer: '10', hint: '2 × 5 = ?', difficulty: 1, explanation: 'y = 2 × 5 = 10' },
-      { question: 'Löse: 2x + 4 = 14', answer: '5', hint: 'Erst −4, dann ÷2.', difficulty: 2, explanation: '2x = 10, x = 5' },
-      { question: 'Setze fort: 1, 3, 6, 10, ___ (Dreieckszahlen)', answer: '15', hint: '+2, +3, +4, +?', difficulty: 2, explanation: '10 + 5 = 15' },
-      { question: 'y = 3x − 2. Wenn y = 7, was ist x?', answer: '3', hint: '7 + 2 = 9, dann 9 ÷ 3.', difficulty: 2, explanation: '3x = 9, x = 3' },
-      { question: 'Sind 2x und x + x das Gleiche?', answer: 'Ja', hint: 'x + x = 2 mal x.', difficulty: 1, explanation: 'Ja, x + x = 2x.' },
-      { question: 'Löse: x/2 = 8', answer: '16', hint: 'Beide Seiten × 2.', difficulty: 2, explanation: 'x = 8 × 2 = 16' },
-    ],
-    '7-8': [
-      { question: 'Löse: 2x + 3 = 11', answer: '4', hint: 'Erst −3, dann ÷2.', difficulty: 1, explanation: '2x = 8, x = 4' },
-      { question: 'Was ist der y-Achsenabschnitt von y = 3x + 5?', answer: '5', hint: 'Setze x = 0 ein.', difficulty: 1, explanation: 'y(0) = 5' },
-      { question: 'Welche Steigung hat y = −2x + 1?', answer: '-2', hint: 'y = mx + b, m ist die Steigung.', difficulty: 1, explanation: 'm = −2' },
-      { question: 'Löse: x + y = 10 und x − y = 4. Was ist x?', answer: '7', hint: 'Addiere beide Gleichungen.', difficulty: 2, explanation: '2x = 14, x = 7' },
-      { question: 'Vereinfache: 2(3x − 1) + 4', answer: '6x + 2', hint: 'Ausmultiplizieren und zusammenfassen.', difficulty: 2, explanation: '6x − 2 + 4 = 6x + 2' },
-      { question: 'Für f(x) = x², was ist f(3)?', answer: '9', hint: '3² = ?', difficulty: 1, explanation: 'f(3) = 9' },
-      { question: 'Löse: 5(x − 2) = 3x + 4', answer: '7', hint: '5x − 10 = 3x + 4', difficulty: 2, explanation: '2x = 14, x = 7' },
-      { question: 'Was ist die Nullstelle von y = 4x − 8?', answer: '2', hint: 'Setze y = 0.', difficulty: 2, explanation: '4x = 8, x = 2' },
-      { question: 'Welcher Term: "das Dreifache einer Zahl minus 7"?', answer: '3x - 7', hint: 'x ist die unbekannte Zahl.', difficulty: 1, explanation: '3x − 7' },
-      { question: 'Löse: x² = 49. Gib beide Lösungen an.', answer: '7 und -7', hint: 'Welche Zahlen ergeben quadriert 49?', difficulty: 3, explanation: 'x = 7 oder x = −7' },
-    ],
-  },
-  'L5': {
-    '1-2': [
-      { question: 'Du wirfst eine Münze. Was kann passieren?', answer: 'Kopf oder Zahl', hint: 'Eine Münze hat zwei Seiten.', difficulty: 1, explanation: 'Kopf oder Zahl.' },
-      { question: 'Zähle: Rot, Blau, Rot, Rot, Blau. Welche Farbe kommt öfter?', answer: 'Rot', hint: 'Zähle jede Farbe.', difficulty: 1, explanation: 'Rot: 3×, Blau: 2×.' },
-      { question: 'Es gibt 4 rote und 1 blaue Kugel. Welche Farbe ziehst du wahrscheinlicher?', answer: 'Rot', hint: 'Welche Farbe gibt es öfter?', difficulty: 1, explanation: 'Rot ist wahrscheinlicher (4 von 5).' },
-      { question: 'Wie viele Augen kann ein Würfel zeigen?', answer: '1, 2, 3, 4, 5 oder 6', hint: 'Schau dir einen Würfel an.', difficulty: 1, explanation: 'Ein Würfel hat die Zahlen 1 bis 6.' },
-      { question: 'In der Klasse mögen 8 Kinder Eis und 5 Kuchen. Was ist beliebter?', answer: 'Eis', hint: '8 > 5', difficulty: 1, explanation: 'Eis (8 > 5).' },
-      { question: 'Sortiere: 3, 1, 5, 2. Was kommt zuerst?', answer: '1', hint: 'Die kleinste Zahl zuerst.', difficulty: 1, explanation: '1, 2, 3, 5' },
-      { question: 'Würfle: Ist es möglich, eine 7 zu würfeln?', answer: 'Nein', hint: 'Der Würfel hat nur 1–6.', difficulty: 1, explanation: 'Nein, ein Würfel zeigt nur 1–6.' },
-      { question: 'Du hast 3 rote, 3 blaue Kugeln. Ist rot und blau gleich wahrscheinlich?', answer: 'Ja', hint: 'Gleich viele von jeder Farbe.', difficulty: 1, explanation: 'Ja, 3 = 3, also gleich wahrscheinlich.' },
-      { question: 'Wie viele Kinder sind in einer Reihe: ●●●●●?', answer: '5', hint: 'Zähle die Punkte.', difficulty: 1, explanation: '5 Punkte = 5 Kinder.' },
-      { question: 'Was ist wahrscheinlicher: Sonne morgen ODER Schnee im Juli?', answer: 'Sonne morgen', hint: 'Was passiert häufiger?', difficulty: 1, explanation: 'Sonne morgen ist viel wahrscheinlicher.' },
-    ],
-    '3-4': [
-      { question: 'Du wirfst eine Münze. Wie viele mögliche Ergebnisse gibt es?', answer: '2', hint: 'Kopf oder Zahl.', difficulty: 1, explanation: 'Kopf und Zahl = 2 Ergebnisse.' },
-      { question: '5 Mädchen und 7 Jungen. Wie viele Kinder insgesamt?', answer: '12', hint: '5 + 7 = ?', difficulty: 1, explanation: '5 + 7 = 12' },
-      { question: 'Modus von 3, 5, 3, 7, 3, 8?', answer: '3', hint: 'Welche Zahl kommt am öftesten vor?', difficulty: 1, explanation: '3 kommt 3-mal vor.' },
-      { question: 'Mittelwert von 4, 6, 8?', answer: '6', hint: 'Addiere alle und teile durch die Anzahl.', difficulty: 2, explanation: '(4+6+8) ÷ 3 = 6' },
-      { question: '3 rote und 2 blaue Kugeln. Wie viele insgesamt?', answer: '5', hint: '3 + 2 = ?', difficulty: 1, explanation: '3 + 2 = 5 Kugeln' },
-      { question: 'Ist es möglich: Ein Würfel zeigt die 7?', answer: 'unmöglich', hint: 'Ein Würfel hat 1–6.', difficulty: 1, explanation: 'Unmöglich, Würfel zeigt nur 1–6.' },
-      { question: 'Alle Augen eines Würfels zusammen?', answer: '21', hint: '1+2+3+4+5+6', difficulty: 2, explanation: '1+2+3+4+5+6 = 21' },
-      { question: 'Balken für Hund: 6 cm, Katze: 4 cm. Was ist beliebter?', answer: 'Hund', hint: 'Höherer Balken = mehr.', difficulty: 1, explanation: 'Hund (6 > 4).' },
-      { question: '2 Münzen werfen: Wie viele verschiedene Ergebnisse?', answer: '4', hint: 'KK, KZ, ZK, ZZ', difficulty: 2, explanation: 'KK, KZ, ZK, ZZ = 4' },
-      { question: 'Wahrscheinlicher: eine 6 oder KEINE 6 würfeln?', answer: 'keine 6 würfeln', hint: '5 von 6 sind keine 6.', difficulty: 2, explanation: 'P(keine 6) = 5/6 > P(6) = 1/6' },
-    ],
-    '5-6': [
-      { question: 'Berechne den Mittelwert: 10, 20, 30, 40.', answer: '25', hint: 'Summe ÷ Anzahl', difficulty: 1, explanation: '100 ÷ 4 = 25' },
-      { question: 'Wie groß ist die Wahrscheinlichkeit, eine 6 zu würfeln?', answer: '1/6', hint: '1 günstig von 6 möglichen.', difficulty: 1, explanation: 'P(6) = 1/6' },
-      { question: 'Spannweite von 3, 8, 12, 5, 1?', answer: '11', hint: 'Größter − kleinster Wert.', difficulty: 1, explanation: '12 − 1 = 11' },
-      { question: 'Was ist der Median von 2, 5, 1, 8, 3?', answer: '3', hint: 'Sortiere und nimm den mittleren Wert.', difficulty: 2, explanation: 'Sortiert: 1,2,3,5,8 → Median = 3' },
-      { question: 'Wahrscheinlichkeit, aus 4 roten und 6 blauen eine rote zu ziehen?', answer: '4/10', hint: '4 günstig von 10 möglich.', difficulty: 2, explanation: 'P = 4/10 = 2/5' },
-      { question: 'In einer Klasse: 12 mögen Fußball, 8 Basketball, 5 beides. Wie viele mögen mindestens eins?', answer: '15', hint: '12 + 8 − 5 (nicht doppelt zählen!)', difficulty: 3, explanation: '12 + 8 − 5 = 15' },
-      { question: 'Du wirfst 2 Würfel. Wie viele mögliche Ergebnisse gibt es?', answer: '36', hint: '6 × 6', difficulty: 2, explanation: '6 × 6 = 36 Kombinationen' },
-      { question: 'Mittelwert von 7, 3, 5, 9, 6?', answer: '6', hint: 'Summe: 30, Anzahl: 5', difficulty: 1, explanation: '30 ÷ 5 = 6' },
-      { question: 'Wie viel Prozent sind 15 von 60?', answer: '25', hint: '15/60 × 100', difficulty: 2, explanation: '15/60 = 0,25 = 25%' },
-      { question: 'Ein Glücksrad hat 4 gleiche Felder: rot, blau, grün, gelb. P(rot)?', answer: '1/4', hint: '1 von 4 Feldern.', difficulty: 1, explanation: 'P(rot) = 1/4 = 25%' },
-    ],
-    '7-8': [
-      { question: 'Berechne den Median: 12, 5, 8, 3, 15, 7, 10.', answer: '8', hint: 'Sortieren, mittleren Wert nehmen.', difficulty: 1, explanation: 'Sortiert: 3,5,7,8,10,12,15 → Median=8' },
-      { question: 'P(mindestens eine 6 bei 2 Würfeln)?', answer: '11/36', hint: 'Gegenwahrscheinlichkeit: P(keine 6) = 25/36.', difficulty: 3, explanation: '1 − 25/36 = 11/36' },
-      { question: 'Was ist die Standardabweichung ein Maß für?', answer: 'Streuung', hint: 'Wie weit liegen Werte vom Mittelwert entfernt?', difficulty: 1, explanation: 'Die Standardabweichung misst die Streuung der Daten.' },
-      { question: 'Mittelwert von 2, 4, 6, 8, 10, 12?', answer: '7', hint: '42 ÷ 6', difficulty: 1, explanation: '42 ÷ 6 = 7' },
-      { question: 'P(gerade Zahl beim Würfeln)?', answer: '1/2', hint: '2, 4, 6 sind gerade – 3 von 6.', difficulty: 1, explanation: '3/6 = 1/2' },
-      { question: 'Baumdiagramm: 2 Münzen. Wie viele Pfade?', answer: '4', hint: 'Jede Münze: 2 Möglichkeiten.', difficulty: 1, explanation: '2 × 2 = 4 Pfade' },
-      { question: 'Was ist ein Boxplot?', answer: 'Diagramm mit Minimum, Q1, Median, Q3, Maximum', hint: 'Es zeigt die 5 wichtigsten Kennwerte.', difficulty: 2, explanation: 'Ein Boxplot stellt die 5-Punkt-Zusammenfassung grafisch dar.' },
-      { question: 'Relative Häufigkeit: 30 Versuche, 12× Treffer?', answer: '0,4', hint: '12/30', difficulty: 1, explanation: '12/30 = 0,4 = 40%' },
-      { question: 'Sind die Ereignisse "gerade Zahl" und "Zahl > 4" unabhängig?', answer: 'Nein', hint: 'Prüfe ob P(A∩B) = P(A)×P(B).', difficulty: 3, explanation: 'P(gerade)=1/2, P(>4)=1/3, P(gerade ∧ >4)=1/6=1/2×1/3, also ja, sie sind unabhängig.' },
-      { question: 'Wie viele Möglichkeiten: 3 Buchstaben aus A,B,C,D (ohne Zurücklegen)?', answer: '24', hint: '4 × 3 × 2', difficulty: 2, explanation: '4! / 1! = 24 Permutationen' },
+      {
+        type: 'number-line-fraction',
+        code: 'ZO4',
+        niveau: 'D',
+        question: 'Wo liegt 3/4 auf dem Zahlenstrahl? Tippe auf die Stelle.',
+        numerator: 3,
+        denominator: 4,
+        answer: '3/4',
+        hint: 'Teile die Strecke von 0 bis 1 in 4 gleich große Abschnitte.',
+        difficulty: 1,
+        explanation: '3/4 liegt drei Viertel zwischen 0 und 1 – also direkt vor der 1.',
+      },
     ],
   },
 }
 
 function getMockTasks(competencyId, grade) {
-  const compTasks = MOCK_TASKS[competencyId]
   const mockKey = MOCK_GRADE_MAP[grade] || grade
-  if (!compTasks) return MOCK_TASKS['L1']['3-4']
-  return compTasks[mockKey] || Object.values(compTasks)[0]
+  return MOCK_TASKS[competencyId]?.[mockKey] ?? []
 }
 
 function mockCheckAnswer(correctAnswer, studentAnswer) {
@@ -457,6 +248,7 @@ const initialState = {
   selectedCompetency: null,
   selectedGrade: null,
   tasks: [],
+  sessionId: 0,
   currentTaskIndex: 0,
   answers: [],
   sessionActive: false,
@@ -541,16 +333,21 @@ function appReducer(state, action) {
     case 'START_LOADING':
       return { ...state, isLoading: true, error: null }
     case 'TASKS_LOADED':
-      return { ...state, tasks: action.tasks, currentTaskIndex: 0, answers: [], sessionActive: true, sessionComplete: false, isLoading: false, useMock: action.useMock || false }
+      return { ...state, tasks: action.tasks, sessionId: state.sessionId + 1, currentTaskIndex: 0, answers: [], sessionActive: true, sessionComplete: false, isLoading: false, useMock: action.useMock || false }
     case 'LOADING_ERROR':
       return { ...state, isLoading: false, error: action.error }
-    case 'SUBMIT_ANSWER':
-      return { ...state, answers: [...state.answers, action.answer], isLoading: false }
+    case 'SUBMIT_ANSWER': {
+      const idx = state.answers.findIndex(a => a.taskIndex === action.answer.taskIndex)
+      const next = idx >= 0
+        ? state.answers.map((a, i) => (i === idx ? action.answer : a))
+        : [...state.answers, action.answer]
+      return { ...state, answers: next, isLoading: false }
+    }
     case 'NEXT_TASK':
       return { ...state, currentTaskIndex: state.currentTaskIndex + 1 }
     case 'COMPLETE_SESSION': {
       const correctCount = state.answers.filter(a => a.correct).length
-      const earned = correctCount >= 6
+      const earned = correctCount >= Math.ceil(state.answers.length * 0.6)
       const isNew = earned && !state.medals[state.selectedCompetency]
       const newMedals = earned ? { ...state.medals, [state.selectedCompetency]: true } : state.medals
       const newEntry = {
@@ -1030,6 +827,286 @@ function HomePage({ state, dispatch }) {
 }
 
 // ============================================================
+// INTERACTIVE TASK COMPONENTS
+// ============================================================
+
+const COLUMN_LABELS = {
+  HT: 'Hunderttausender',
+  ZT: 'Zehntausender',
+  T: 'Tausender',
+  H: 'Hunderter',
+  Z: 'Zehner',
+  E: 'Einer',
+}
+
+function PlaceValueTask({ task, onChange, disabled }) {
+  const digits = useMemo(
+    () => String(task.number).padStart(task.columns.length, '0').split('').map((d, i) => ({ id: i, digit: d })),
+    [task.number, task.columns.length],
+  )
+  const [slots, setSlots] = useState(() => task.columns.map(() => null))
+  const [picked, setPicked] = useState(null)
+  const [dragId, setDragId] = useState(null)
+  const [dragOverSlot, setDragOverSlot] = useState(null)
+  const [dragOverPool, setDragOverPool] = useState(false)
+
+  useEffect(() => {
+    const allFilled = slots.every(s => s !== null)
+    onChange(allFilled ? slots.map(s => s.digit).join('') : '')
+  }, [slots, onChange])
+
+  const placedIds = new Set(slots.filter(Boolean).map(s => s.id))
+  const pool = digits.filter(d => !placedIds.has(d.id))
+
+  const placeChip = (chipId, targetIdx) => {
+    setSlots(prev => {
+      const fromIdx = prev.findIndex(s => s?.id === chipId)
+      if (fromIdx === targetIdx) return prev
+      const chip = digits.find(d => d.id === chipId)
+      if (!chip) return prev
+      const next = [...prev]
+      const displaced = prev[targetIdx]
+      next[targetIdx] = chip
+      if (fromIdx >= 0) next[fromIdx] = displaced ?? null
+      return next
+    })
+  }
+
+  const removeFromSlot = (idx) => {
+    setSlots(prev => { const next = [...prev]; next[idx] = null; return next })
+  }
+
+  const returnChipToPool = (chipId) => {
+    setSlots(prev => {
+      const fromIdx = prev.findIndex(s => s?.id === chipId)
+      if (fromIdx < 0) return prev
+      const next = [...prev]
+      next[fromIdx] = null
+      return next
+    })
+  }
+
+  const handleSlotClick = (idx) => {
+    if (disabled) return
+    if (slots[idx]) { removeFromSlot(idx); return }
+    if (picked) { placeChip(picked.id, idx); setPicked(null) }
+  }
+
+  const handleChipClick = (chip) => {
+    if (disabled) return
+    setPicked(prev => prev?.id === chip.id ? null : chip)
+  }
+
+  const handleDragStart = (chipId) => (e) => {
+    if (disabled) return
+    setDragId(chipId)
+    setPicked(null)
+    e.dataTransfer.effectAllowed = 'move'
+    try { e.dataTransfer.setData('text/plain', String(chipId)) } catch { /* Safari */ }
+  }
+
+  const handleDragEnd = () => {
+    setDragId(null)
+    setDragOverSlot(null)
+    setDragOverPool(false)
+  }
+
+  const handleSlotDragOver = (idx) => (e) => {
+    if (disabled || dragId === null) return
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    if (dragOverSlot !== idx) setDragOverSlot(idx)
+  }
+
+  const handleSlotDragLeave = (idx) => () => {
+    if (dragOverSlot === idx) setDragOverSlot(null)
+  }
+
+  const handleSlotDrop = (idx) => (e) => {
+    if (disabled) return
+    e.preventDefault()
+    const idStr = e.dataTransfer.getData('text/plain')
+    const chipId = idStr === '' ? dragId : parseInt(idStr, 10)
+    if (chipId === null || Number.isNaN(chipId)) return
+    placeChip(chipId, idx)
+    handleDragEnd()
+  }
+
+  const handlePoolDragOver = (e) => {
+    if (disabled || dragId === null) return
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    if (!dragOverPool) setDragOverPool(true)
+  }
+
+  const handlePoolDragLeave = () => {
+    if (dragOverPool) setDragOverPool(false)
+  }
+
+  const handlePoolDrop = (e) => {
+    if (disabled) return
+    e.preventDefault()
+    const idStr = e.dataTransfer.getData('text/plain')
+    const chipId = idStr === '' ? dragId : parseInt(idStr, 10)
+    if (chipId === null || Number.isNaN(chipId)) return
+    returnChipToPool(chipId)
+    handleDragEnd()
+  }
+
+  return (
+    <div className="bg-cream/50 border border-sky/20 rounded-2xl p-4 md:p-5">
+      <div className="grid gap-2 mb-4" style={{ gridTemplateColumns: `repeat(${task.columns.length}, minmax(0, 1fr))` }}>
+        {task.columns.map((col, idx) => {
+          const chip = slots[idx]
+          const isDragHover = dragOverSlot === idx
+          const isDragSource = chip && dragId === chip.id
+          return (
+            <div key={idx} className="flex flex-col items-center">
+              <span className="font-body text-xs text-dark-light mb-1" title={COLUMN_LABELS[col] || col}>{col}</span>
+              <div
+                onDragOver={handleSlotDragOver(idx)}
+                onDragLeave={handleSlotDragLeave(idx)}
+                onDrop={handleSlotDrop(idx)}
+                className={`w-full aspect-square min-h-12 rounded-xl border-2 border-dashed flex items-center justify-center transition-all
+                  ${chip
+                    ? 'border-sky bg-white'
+                    : isDragHover
+                      ? 'border-pink bg-pink-light/30'
+                      : picked
+                        ? 'border-pink bg-pink-light/20'
+                        : 'border-sky/40 bg-white/60'}
+                  ${isDragHover ? 'scale-105' : ''}`}
+              >
+                {chip ? (
+                  <button
+                    type="button"
+                    draggable={!disabled}
+                    onDragStart={handleDragStart(chip.id)}
+                    onDragEnd={handleDragEnd}
+                    onClick={() => handleSlotClick(idx)}
+                    disabled={disabled}
+                    aria-label={`${COLUMN_LABELS[col] || col} – ${chip.digit} (klicken zum Entfernen, ziehen zum Verschieben)`}
+                    className={`w-full h-full rounded-xl font-heading font-bold text-2xl md:text-3xl text-dark transition-opacity
+                      ${isDragSource ? 'opacity-30' : 'opacity-100'}
+                      ${disabled ? 'cursor-default' : 'cursor-grab active:cursor-grabbing hover:text-pink'}`}
+                  >
+                    {chip.digit}
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleSlotClick(idx)}
+                    disabled={disabled || (!picked && dragId === null)}
+                    aria-label={`${COLUMN_LABELS[col] || col} – leer`}
+                    className="w-full h-full rounded-xl font-heading font-bold text-2xl md:text-3xl text-transparent disabled:cursor-default"
+                  >
+                    0
+                  </button>
+                )}
+              </div>
+            </div>
+          )
+        })}
+      </div>
+
+      <p className="font-body text-xs text-dark-light mb-2">Ziehe von hier:</p>
+      <div
+        onDragOver={handlePoolDragOver}
+        onDragLeave={handlePoolDragLeave}
+        onDrop={handlePoolDrop}
+        className={`min-h-14 flex flex-wrap gap-2 rounded-xl p-2 transition-all
+          ${dragOverPool ? 'bg-sky-light/30 ring-2 ring-sky/40' : 'bg-transparent'}`}
+      >
+        {pool.length === 0 && !dragOverPool && (
+          <span className="font-body text-sm text-dark-light italic self-center">Alle Ziffern verteilt – ziehe sie hierher zurück oder klicke auf ein Feld.</span>
+        )}
+        {pool.map(chip => {
+          const isDragSource = dragId === chip.id
+          return (
+            <button
+              key={chip.id}
+              type="button"
+              draggable={!disabled}
+              onDragStart={handleDragStart(chip.id)}
+              onDragEnd={handleDragEnd}
+              onClick={() => handleChipClick(chip)}
+              disabled={disabled}
+              className={`w-12 h-12 rounded-xl font-heading font-bold text-2xl shadow-sm transition-all
+                ${picked?.id === chip.id
+                  ? 'bg-pink text-white scale-110 ring-2 ring-pink-dark'
+                  : 'bg-sky-light/60 text-dark hover:bg-sky-light hover:scale-105'}
+                ${isDragSource ? 'opacity-30' : 'opacity-100'}
+                ${disabled ? 'cursor-default opacity-60' : 'cursor-grab active:cursor-grabbing'}`}
+            >
+              {chip.digit}
+            </button>
+          )
+        })}
+      </div>
+    </div>
+  )
+}
+
+function NumberLineFractionTask({ task, onChange, disabled }) {
+  const denom = task.denominator
+  const [selected, setSelected] = useState(null)
+
+  const handleClick = (e) => {
+    if (disabled) return
+    const rect = e.currentTarget.getBoundingClientRect()
+    const x = (e.clientX - rect.left) / rect.width
+    const clamped = Math.max(0, Math.min(1, x))
+    const num = Math.round(clamped * denom)
+    setSelected(num)
+    onChange(`${num}/${denom}`)
+  }
+
+  const margin = 8
+  const xPercent = (n) => margin + (n / denom) * (100 - 2 * margin)
+
+  return (
+    <div className="bg-cream/50 border border-sky/20 rounded-2xl p-4 md:p-6">
+      <div
+        onClick={handleClick}
+        className={`relative w-full h-24 select-none ${disabled ? 'cursor-default' : 'cursor-pointer'}`}
+      >
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" className="w-full h-full overflow-visible">
+          <line x1={margin} y1="12" x2={100 - margin} y2="12" stroke="#3A3A5C" strokeWidth="0.4" vectorEffect="non-scaling-stroke" />
+          {Array.from({ length: denom + 1 }, (_, i) => (
+            <line
+              key={i}
+              x1={xPercent(i)}
+              y1={i === 0 || i === denom ? 7 : 9}
+              x2={xPercent(i)}
+              y2={i === 0 || i === denom ? 17 : 15}
+              stroke="#3A3A5C"
+              strokeWidth="0.4"
+              vectorEffect="non-scaling-stroke"
+            />
+          ))}
+        </svg>
+        {selected !== null && (
+          <div
+            className="absolute top-1/2 w-5 h-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink border-2 border-pink-dark pointer-events-none"
+            style={{ left: `${xPercent(selected)}%` }}
+          />
+        )}
+        <span className="absolute top-full mt-1 -translate-x-1/2 font-body text-sm text-dark" style={{ left: `${xPercent(0)}%` }}>0</span>
+        <span className="absolute top-full mt-1 -translate-x-1/2 font-body text-sm text-dark" style={{ left: `${xPercent(denom)}%` }}>1</span>
+      </div>
+      {selected !== null && (
+        <p className="mt-8 font-body text-sm text-dark-light text-center">
+          Gesetzt: <span className="font-heading font-semibold text-dark">{selected}/{denom}</span>
+        </p>
+      )}
+      {selected === null && (
+        <p className="mt-8 font-body text-sm text-dark-light text-center">Tippe auf den Zahlenstrahl, um deine Stelle zu wählen.</p>
+      )}
+    </div>
+  )
+}
+
+// ============================================================
 // PAGE: TASKS
 // ============================================================
 
@@ -1042,6 +1119,10 @@ function TasksPage({ state, dispatch }) {
     dispatch({ type: 'START_LOADING' })
     try {
       const { tasks, isMock } = await generateTasks(state.selectedCompetency, state.selectedGrade)
+      if (!tasks || tasks.length === 0) {
+        dispatch({ type: 'LOADING_ERROR', error: 'Für diese Auswahl sind im Demo-Modus keine Aufgaben verfügbar. Bitte API-Key in .env eintragen oder eine andere Klassenstufe wählen.' })
+        return
+      }
       dispatch({ type: 'TASKS_LOADED', tasks, useMock: isMock })
     } catch (err) {
       dispatch({ type: 'LOADING_ERROR', error: err.message })
@@ -1065,7 +1146,7 @@ function TasksPage({ state, dispatch }) {
   }, [state.tasks, state.currentTaskIndex, studentAnswer, state.useMock, dispatch])
 
   const handleNext = useCallback(() => {
-    if (state.currentTaskIndex >= 9) {
+    if (state.currentTaskIndex >= state.tasks.length - 1) {
       dispatch({ type: 'COMPLETE_SESSION' })
     } else {
       dispatch({ type: 'NEXT_TASK' })
@@ -1073,7 +1154,7 @@ function TasksPage({ state, dispatch }) {
       setCurrentFeedback(null)
       setShowHint(false)
     }
-  }, [state.currentTaskIndex, dispatch])
+  }, [state.currentTaskIndex, state.tasks.length, dispatch])
 
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter') {
@@ -1085,8 +1166,10 @@ function TasksPage({ state, dispatch }) {
   // Session Complete
   if (state.sessionComplete) {
     const correctCount = state.answers.filter(a => a.correct).length
+    const totalCount = state.answers.length || state.tasks.length || 1
+    const required = Math.ceil(totalCount * 0.6)
     const comp = COMPETENCY_AREAS.find(c => c.id === state.selectedCompetency)
-    const earned = correctCount >= 6
+    const earned = correctCount >= required
 
     return (
       <div className="fade-in max-w-2xl mx-auto">
@@ -1098,9 +1181,9 @@ function TasksPage({ state, dispatch }) {
           <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-2xl mb-4 ${earned ? 'bg-success-light/30' : 'bg-error-light/30'}`}>
             <span className="text-4xl">{earned ? '🎉' : '💪'}</span>
             <div className="text-left">
-              <p className="font-heading font-bold text-2xl text-dark">{correctCount} von 10 richtig</p>
+              <p className="font-heading font-bold text-2xl text-dark">{correctCount} von {totalCount} richtig</p>
               <p className="font-body text-sm text-dark-light">
-                {earned ? 'Medaille verdient!' : 'Du brauchst 6 richtige für die Medaille.'}
+                {earned ? 'Medaille verdient!' : `Du brauchst ${required} richtige für die Medaille.`}
               </p>
             </div>
           </div>
@@ -1108,7 +1191,7 @@ function TasksPage({ state, dispatch }) {
           <div className="w-full bg-gray-100 rounded-full h-4 mb-6 overflow-hidden">
             <div
               className={`h-full rounded-full progress-fill ${earned ? 'bg-success' : 'bg-warning'}`}
-              style={{ width: `${correctCount * 10}%` }}
+              style={{ width: `${(correctCount / totalCount) * 100}%` }}
             />
           </div>
 
@@ -1176,13 +1259,13 @@ function TasksPage({ state, dispatch }) {
             </div>
           </div>
           <div className="text-right">
-            <p className="font-heading font-semibold text-sm text-dark">Aufgabe {state.currentTaskIndex + 1}/10</p>
+            <p className="font-heading font-semibold text-sm text-dark">Aufgabe {state.currentTaskIndex + 1}/{state.tasks.length}</p>
             <p className="font-body text-xs text-success">{correctSoFar} richtig</p>
           </div>
         </div>
 
         <div className="w-full bg-gray-100 rounded-full h-2.5 mb-6">
-          <div className="bg-sky h-full rounded-full transition-all duration-500" style={{ width: `${(state.currentTaskIndex + 1) * 10}%` }} />
+          <div className="bg-sky h-full rounded-full transition-all duration-500" style={{ width: `${((state.currentTaskIndex + 1) / state.tasks.length) * 100}%` }} />
         </div>
 
         <div className={`bg-white rounded-3xl p-6 md:p-8 shadow-md transition-all
@@ -1196,6 +1279,17 @@ function TasksPage({ state, dispatch }) {
               {(task?.difficulty || 1) === 1 ? 'Leicht' : (task?.difficulty || 1) === 2 ? 'Mittel' : 'Schwer'}
             </span>
           </div>
+
+          {(task?.code || task?.niveau) && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {task.code && (
+                <span className="inline-block bg-pink-light/40 text-pink-dark font-body text-xs font-semibold px-2 py-0.5 rounded-md">{task.code}</span>
+              )}
+              {task.niveau && (
+                <span className="inline-block bg-sky-light/40 text-sky-dark font-body text-xs font-semibold px-2 py-0.5 rounded-md">Niveaustufe {task.niveau}</span>
+              )}
+            </div>
+          )}
 
           <h3 className="font-heading font-bold text-xl md:text-2xl text-dark mb-6">{task?.question}</h3>
 
@@ -1213,7 +1307,28 @@ function TasksPage({ state, dispatch }) {
             </div>
           )}
 
-          {!currentFeedback && (
+          {task?.type === 'place-value' && (
+            <div className="mb-4">
+              <PlaceValueTask
+                key={state.currentTaskIndex}
+                task={task}
+                onChange={setStudentAnswer}
+                disabled={!!currentFeedback}
+              />
+            </div>
+          )}
+          {task?.type === 'number-line-fraction' && (
+            <div className="mb-4">
+              <NumberLineFractionTask
+                key={state.currentTaskIndex}
+                task={task}
+                onChange={setStudentAnswer}
+                disabled={!!currentFeedback}
+              />
+            </div>
+          )}
+
+          {!currentFeedback && !task?.type && (
             <div className="flex gap-3">
               <input
                 type="text"
@@ -1235,6 +1350,18 @@ function TasksPage({ state, dispatch }) {
             </div>
           )}
 
+          {!currentFeedback && task?.type && (
+            <div className="flex justify-end">
+              <button
+                onClick={handleSubmit}
+                disabled={!studentAnswer.trim() || state.isLoading}
+                className="bg-sky text-white font-heading font-semibold px-6 py-3 rounded-xl shadow-md hover:bg-sky-dark transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {state.isLoading ? '...' : 'Antwort prüfen'}
+              </button>
+            </div>
+          )}
+
           {currentFeedback && (
             <div className={`rounded-2xl p-4 mt-4 fade-in ${currentFeedback.correct ? 'bg-success/10' : 'bg-error/10'}`}>
               <div className="flex items-start gap-3">
@@ -1249,12 +1376,22 @@ function TasksPage({ state, dispatch }) {
                   )}
                 </div>
               </div>
-              <button
-                onClick={handleNext}
-                className="mt-4 bg-sky text-white font-heading font-semibold px-6 py-2 rounded-xl shadow hover:bg-sky-dark transition-colors cursor-pointer w-full"
-              >
-                {state.currentTaskIndex >= 9 ? '📊 Ergebnis anzeigen' : 'Nächste Aufgabe →'}
-              </button>
+              <div className="mt-4 flex flex-col sm:flex-row gap-2">
+                {!currentFeedback.correct && (
+                  <button
+                    onClick={() => setCurrentFeedback(null)}
+                    className="flex-1 bg-white text-sky border-2 border-sky font-heading font-semibold px-6 py-2 rounded-xl shadow hover:bg-sky/10 transition-colors cursor-pointer"
+                  >
+                    🔁 Nochmal versuchen
+                  </button>
+                )}
+                <button
+                  onClick={handleNext}
+                  className="flex-1 bg-sky text-white font-heading font-semibold px-6 py-2 rounded-xl shadow hover:bg-sky-dark transition-colors cursor-pointer"
+                >
+                  {state.currentTaskIndex >= state.tasks.length - 1 ? '📊 Ergebnis anzeigen' : 'Nächste Aufgabe →'}
+                </button>
+              </div>
             </div>
           )}
         </div>
@@ -1362,7 +1499,7 @@ function MedalsPage({ state }) {
             <MedalBadge competencyId={comp.id} earned={state.medals[comp.id]} size="large" />
             <p className="font-body text-xs text-dark-light mt-3">{comp.name}</p>
             {!state.medals[comp.id] && (
-              <p className="font-body text-xs text-pink mt-1">6/10 richtige nötig</p>
+              <p className="font-body text-xs text-pink mt-1">60% richtige nötig</p>
             )}
           </div>
         ))}
@@ -1500,7 +1637,7 @@ function ProgressPage({ state }) {
               {[...state.sessionHistory].reverse().map((session, i) => {
                 const comp = COMPETENCY_AREAS.find(c => c.id === session.competencyId)
                 const gl = GRADE_LEVELS.find(g => g.grades === session.grade)
-                const passed = session.correctCount >= 6
+                const passed = session.correctCount >= Math.ceil((session.totalCount || 1) * 0.6)
                 return (
                   <tr key={i} className="border-b border-gray-50">
                     <td className="font-body text-sm text-dark-light py-2 pr-4">
@@ -1618,7 +1755,7 @@ export default function App() {
     switch (state.currentPage) {
       case PAGES.PROFILE: return <ProfilePage state={state} dispatch={dispatch} />
       case PAGES.HOME: return <HomePage state={state} dispatch={dispatch} />
-      case PAGES.TASKS: return <TasksPage state={state} dispatch={dispatch} />
+      case PAGES.TASKS: return <TasksPage key={state.sessionId} state={state} dispatch={dispatch} />
       case PAGES.MEDALS: return <MedalsPage state={state} />
       case PAGES.PROGRESS: return <ProgressPage state={state} />
       case PAGES.HELP: return <HelpPage />
