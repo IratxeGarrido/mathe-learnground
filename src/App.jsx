@@ -15,11 +15,17 @@ const COMPETENCY_AREAS = [
 ]
 
 const GRADE_LEVELS = [
-  { grades: '1-2', label: 'Klasse 1–2', niveau: 'A/B' },
-  { grades: '3-4', label: 'Klasse 3–4', niveau: 'C' },
-  { grades: '5-6', label: 'Klasse 5–6', niveau: 'D' },
-  { grades: '7-8', label: 'Klasse 7–8', niveau: 'E/F' },
+  { grades: '1', label: 'Klasse 1', niveau: 'A' },
+  { grades: '2', label: 'Klasse 2', niveau: 'A/B' },
+  { grades: '3', label: 'Klasse 3', niveau: 'B/C' },
+  { grades: '4', label: 'Klasse 4', niveau: 'C' },
+  { grades: '5', label: 'Klasse 5', niveau: 'C/D' },
+  { grades: '6', label: 'Klasse 6', niveau: 'D' },
+  { grades: '7', label: 'Klasse 7', niveau: 'D/E' },
+  { grades: '8', label: 'Klasse 8', niveau: 'E/F' },
 ]
+
+const MOCK_GRADE_MAP = { '1': '1-2', '2': '1-2', '3': '3-4', '4': '3-4', '5': '5-6', '6': '5-6', '7': '7-8', '8': '7-8' }
 
 const MATH_SYMBOLS = ['+', '−', '×', '÷', 'π', '√', '=', '%', '∑', '∞']
 
@@ -280,8 +286,9 @@ const MOCK_TASKS = {
 
 function getMockTasks(competencyId, grade) {
   const compTasks = MOCK_TASKS[competencyId]
+  const mockKey = MOCK_GRADE_MAP[grade] || grade
   if (!compTasks) return MOCK_TASKS['L1']['3-4']
-  return compTasks[grade] || Object.values(compTasks)[0]
+  return compTasks[mockKey] || Object.values(compTasks)[0]
 }
 
 function mockCheckAnswer(correctAnswer, studentAnswer) {
