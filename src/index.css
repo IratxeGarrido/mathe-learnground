@@ -1,0 +1,164 @@
+@import "tailwindcss";
+
+/* ===== Custom Theme ===== */
+@theme {
+  --color-cream: #FFF5E6;
+  --color-cream-dark: #F5E6D0;
+  --color-sky: #7EC8E3;
+  --color-sky-light: #B8E0F0;
+  --color-sky-dark: #5BA8C8;
+  --color-pink: #F4A4B8;
+  --color-pink-light: #FADADD;
+  --color-pink-dark: #E0889C;
+  --color-dark: #3A3A5C;
+  --color-dark-light: #5A5A7C;
+  --color-success: #6BCB77;
+  --color-success-light: #A8E6A3;
+  --color-warning: #FFD93D;
+  --color-warning-light: #FFE88A;
+  --color-error: #FF6B6B;
+  --color-error-light: #FFA5A5;
+
+  --font-heading: 'Fredoka', sans-serif;
+  --font-body: 'Nunito', sans-serif;
+}
+
+/* ===== Base Resets ===== */
+body {
+  margin: 0;
+  font-family: 'Nunito', sans-serif;
+  background-color: #FFF5E6;
+  color: #3A3A5C;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ===== Floating Math Symbols ===== */
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% { opacity: 0.12; }
+  90% { opacity: 0.12; }
+  100% {
+    transform: translateY(-10vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.math-symbol {
+  position: fixed;
+  color: #F4A4B8;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: float-up linear infinite;
+}
+
+/* ===== Brain Mascot Bounce ===== */
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.brain-bounce {
+  animation: bounce-gentle 2.5s ease-in-out infinite;
+}
+
+/* ===== Confetti ===== */
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-20px) rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+.confetti-piece {
+  position: fixed;
+  top: -20px;
+  pointer-events: none;
+  z-index: 100;
+  animation: confetti-fall ease-in forwards;
+}
+
+/* ===== Medal Unlock ===== */
+@keyframes medal-glow {
+  0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  60% { transform: scale(1.15) rotate(3deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.medal-unlock {
+  animation: medal-glow 0.8s ease-out forwards;
+}
+
+/* ===== Progress Bar Fill ===== */
+@keyframes fill-bar {
+  from { width: 0%; }
+}
+
+.progress-fill {
+  animation: fill-bar 0.8s ease-out forwards;
+}
+
+/* ===== Answer Feedback Pulse ===== */
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(107, 203, 119, 0.5); }
+  50% { box-shadow: 0 0 0 12px rgba(107, 203, 119, 0); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.5); }
+  50% { box-shadow: 0 0 0 12px rgba(255, 107, 107, 0); }
+}
+
+.pulse-correct {
+  animation: pulse-green 0.8s ease-in-out 2;
+}
+
+.pulse-incorrect {
+  animation: pulse-red 0.8s ease-in-out 2;
+}
+
+/* ===== Fade In ===== */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+/* ===== Spin (Loading) ===== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ===== Celebration Shimmer ===== */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #3A3A5C 0%, #F4A4B8 25%, #7EC8E3 50%, #F4A4B8 75%, #3A3A5C 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
